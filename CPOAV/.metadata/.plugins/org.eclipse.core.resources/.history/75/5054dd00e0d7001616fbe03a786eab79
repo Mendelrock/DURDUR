@@ -1,0 +1,33 @@
+package commandes;
+
+import java.util.GregorianCalendar;
+
+public class Payée extends ACommande{
+
+	public Payée(int numero) {
+		super(numero);
+	}
+
+	@Override
+	public ACommande payer() {
+		throw new CommandeDéjàPayéeEx();
+	}
+
+	@Override
+	public ACommande livrer() {
+		this.dateLiv = new GregorianCalendar();
+		return new Livrée(this);
+	}
+
+	@Override
+	public ACommande rembourser() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	String getEtat() {
+		return  "Payée";
+	}
+
+}

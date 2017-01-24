@@ -1,0 +1,7 @@
+package arithmétique;
+
+public class Variable {
+	private double valeur = 0.;
+	public Variable( double valeur ) { this.valeur = valeur; }
+	public double eval() { return valeur;}
+}

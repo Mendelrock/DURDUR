@@ -1,0 +1,130 @@
+REM ********************************************************
+REM EXERCICE 2
+REM Auteur : FESSY Jérôme
+REM ********************************************************
+
+SET LINESIZE 150
+CLEAR SCREEN
+
+
+DROP TABLE SPECTACLE CASCADE CONSTRAINTS PURGE;
+DROP TABLE CLIENT CASCADE CONSTRAINTS PURGE;
+DROP TABLE RESERVATION CASCADE CONSTRAINTS PURGE;
+
+
+CREATE TABLE CLIENT
+(
+Idclient INTEGER, Nomclient VARCHAR2(15),
+CONSTRAINT PK_CLIENT PRIMARY KEY (Idclient)
+)
+/
+
+CREATE TABLE SPECTACLE
+(
+Idspectacle INTEGER, 
+LibelleSpectacle VARCHAR2(15) NOT NULL, 
+NbPlaceMaxi INTEGER DEFAULT 0 NOT NULL, 
+NbPlaceTotalReservees INTEGER DEFAULT 0,
+CONSTRAINT PK_SPECTACLE PRIMARY KEY (Idspectacle)
+)
+/
+
+CREATE TABLE RESERVATION
+(
+Idclient INTEGER, 
+IdSpectacle INTEGER,
+NbPlaceReservation INTEGER DEFAULT 0,
+DateReservation DATE,
+CONSTRAINT PK_RESERVATION PRIMARY KEY (Idclient, IdSpectacle)
+)
+/
+
+ALTER TABLE RESERVATION 
+ADD CONSTRAINT FK_RESERV_CLIENT FOREIGN KEY(Idclient) REFERENCES CLIENT(idclient)
+ADD CONSTRAINT FK_RESERV_SPECTACLE FOREIGN KEY(Idspectacle) REFERENCES SPECTACLE(idspectacle)
+/
+
+
+REM le trigger ne s''occupe que de l''ajout de reservation. on ne traite pas 
+REM ici ni la suppression ni la mise à jour par soucis de simplification de l''exercice
+
+REM ** version complète du trigger
+
+CREATE OR REPLACE TRIGGER T_MAJ_NBPLACE
+AFTER INSERT OR DELETE OR UPDATE OF nbplacereservation ON RESERVATION
+FOR EACH ROW
+BEGIN
+
+IF INSERTING THEN
+UPDATE SPECTACLE SET nbplacetotalreservees = nbplacetotalreservees + :NEW.nbplacereservation
+WHERE idspectacle = :NEW.idspectacle;
+ELSIF UPDATING THEN
+UPDATE SPECTACLE SET nbplacetotalreservees = nbplacetotalreservees + :NEW.nbplacereservation -:OLD.nbplacereservation
+WHERE idspectacle = :NEW.idspectacle;
+ELSE UPDATE SPECTACLE SET nbplacetotalreservees = nbplacetotalreservees -:OLD.nbplacereservation
+WHERE idspectacle = :NEW.idspectacle;
+END IF;
+END;
+/
+show err
+
+
+REM ** version simplifiée du trigger
+REM ** par soucis de simplification, seule l''insertion d''une réservation est prise en compte
+
+CREATE OR REPLACE TRIGGER T_MAJ_NBPLACE
+AFTER INSERT ON RESERVATION
+FOR EACH ROW
+DECLARE
+
+NbMax INT;
+
+BEGIN
+
+SELECT NbPlaceMaxi-NbPlaceTotalReservees INTO NbMax FROM SPECTACLE WHERE idspectacle = :NEW.idspectacle;
+IF NbMax < :NEW.NbPlaceReservation THEN
+RAISE_APPLICATION_ERROR(-20001, 'Trop de reservations');
+END IF;
+
+IF :NEW.NbPlaceReservation < 0 THEN
+RAISE_APPLICATION_ERROR(-20001, 'Trop peu de reservations');
+END IF;
+
+UPDATE SPECTACLE SET nbplacetotalreservees = nbplacetotalreservees + :NEW.nbplacereservation
+WHERE idspectacle = :NEW.idspectacle;
+
+END;
+/
+show err
+
+
+INSERT INTO spectacle(idspectacle, libellespectacle, nbplacemaxi) VALUES (1, 'Les bonobos', 145)
+/
+INSERT INTO spectacle(idspectacle, libellespectacle, nbplacemaxi) VALUES (2, 'Le cid', 250)
+/
+
+INSERT INTO CLIENT(idclient, nomclient) VALUES (10, 'Dupont')
+/
+INSERT INTO CLIENT(idclient, nomclient) VALUES (20, 'Dytn')
+/
+INSERT INTO CLIENT(idclient, nomclient) VALUES (30, 'harti')
+/
+INSERT INTO CLIENT(idclient, nomclient) VALUES (40, 'Madu')
+/
+
+
+INSERT INTO RESERVATION (idclient, idspectacle, nbplacereservation, datereservation) VALUES (10, 1, 20, sysdate)
+/
+
+INSERT INTO RESERVATION (idclient, idspectacle, nbplacereservation, datereservation) VALUES (20, 1, 3, sysdate)
+/
+
+INSERT INTO RESERVATION (idclient, idspectacle, nbplacereservation, datereservation) VALUES (30, 1, 5, sysdate)
+/
+
+PROMPT **** TABLE CLIENT
+select * from client;
+PROMPT **** TABLE SPECTACLE
+select * from spectacle;
+PROMPT **** TABLE RESERVATION
+select * from reservation;

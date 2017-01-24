@@ -1,0 +1,31 @@
+package hopital;
+
+public class EnAttente implements IEtatPatient {
+
+	@Override
+	public String getDoc(Patient pat) {
+		throw new PatientPasAffecté();
+	}
+
+	@Override
+	public IEtatPatient évaluer(Patient pat) {
+		if (pat.getGravité()>3){
+			pat.setDoc("Dr House");
+			return new Affecté();
+		}
+		return new Evalué();
+	}
+
+	@Override
+	public void affecter(String doc, Patient pat) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void traiter(Patient pat) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

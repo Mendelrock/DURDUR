@@ -1,0 +1,71 @@
+package hopital;
+
+public class Patient implements IEtatPatient {
+	private String nomEtat;
+	private String nom;
+	private String doc;
+	private int gravité;
+	private IEtatPatient état;
+
+	public Patient(String nom, int gravité) {
+		this.nom = nom;
+		this.gravité = gravité;
+		//this.nomEtat = "En Attente";
+		this.doc = null;
+		this.état = new EnAttente();
+	}
+	
+	public String getNomEtat() { 
+		return état.getClass().getSimpleName();
+	}
+
+	public String getNom() { 
+		return nom; 
+	}
+
+	public String getDoc() { 
+		if (! nomEtat.equals("Affecté"))
+			throw new PatientPasAffecté();
+		return doc;
+	}
+
+	public int getGravité() {
+		return gravité; 
+	}
+
+	/* (non-Javadoc)
+	 * @see hopital.IEtatPatient#évaluer()
+	 */
+	@Override
+	public void évaluer () {
+		if (! nomEtat.equals("En Attente"))
+			throw new PatientPasEnAttente();
+		if (this.gravité >3) {
+			nomEtat = "Affecté";
+			doc = "Dr House";
+		}
+		else nomEtat = "Evalué";
+	}
+
+	/* (non-Javadoc)
+	 * @see hopital.IEtatPatient#affecter(java.lang.String)
+	 */
+	@Override
+	public void affecter(String doc) {
+		if (!nomEtat.equals("Evalué"))
+			throw new PatientPasEvalué();
+		nomEtat = "Affecté";
+		this.doc = doc;
+	}
+
+	/* (non-Javadoc)
+	 * @see hopital.IEtatPatient#traiter()
+	 */
+	@Override
+	public void traiter() {
+		if (!nomEtat.equals("Affecté"))
+			throw new PatientPasAffecté();
+		nomEtat = "Traité";
+	}
+}
+

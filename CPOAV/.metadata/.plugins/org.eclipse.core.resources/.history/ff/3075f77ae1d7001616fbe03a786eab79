@@ -1,0 +1,40 @@
+package etats;
+
+import java.util.GregorianCalendar;
+
+import commandes.ACommande;
+import commandes.CommandeDéjàPayéeEx;
+
+public class Payée implements ICommande{
+
+	public Payée(int numero) {
+		this.numero=numero;
+	}
+
+	@Override
+	public ICommande payer() {
+		throw new CommandeDéjàPayéeEx();
+	}
+
+	@Override
+	public ICommande livrer() {
+		this.dateLiv = new GregorianCalendar();
+		return new Livrée(this);
+	}
+
+	@Override
+	public ICommande rembourser() {
+		return new NonPayée(this);
+	}
+
+	@Override
+	public String getEtat() {
+		return  "Payée";
+	}
+
+	@Override
+	public int getNuméro() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

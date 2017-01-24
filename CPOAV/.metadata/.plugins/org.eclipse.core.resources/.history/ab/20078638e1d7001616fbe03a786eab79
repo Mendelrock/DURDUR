@@ -1,0 +1,38 @@
+package etats;
+
+import commandes.CommandeNonLivrableEx;
+import commandes.CommandeNonRemboursableEx;
+
+public class NonPayée implements ICommande{
+
+	public NonPayée(int numero) {
+		this.numero=numero;
+	}
+
+	@Override
+	public ICommande payer() {
+		return new Payée(numero);
+	}
+
+	@Override
+	public ICommande livrer() {
+		throw new CommandeNonLivrableEx();
+	}
+
+	@Override
+	public ICommande rembourser() {
+		throw new CommandeNonRemboursableEx ();
+	}
+
+	@Override
+	String getEtat() {
+		return "Créée";
+	}
+
+	@Override
+	public int getNuméro() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

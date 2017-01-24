@@ -1,0 +1,15 @@
+package variables;
+
+import arithmétique.IVariable;
+
+public class Variable implements IVariable {
+	private double valeur = 0.;
+
+	public Variable( double valeur ) { 
+		this.valeur = valeur; 
+	}
+
+	public double eval() {
+		return valeur;
+	}
+}

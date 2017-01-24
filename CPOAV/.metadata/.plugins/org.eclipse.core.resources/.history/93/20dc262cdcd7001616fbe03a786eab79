@@ -1,0 +1,18 @@
+import java.util.Date;
+
+public class Commande {
+	private int numero;
+	private Date dateLiv = null;
+	private boolean payee = false;
+	public void payer() {this.payee = true;}
+	public void livrer(){
+		if (! this.payee)
+			throw new CommandeNonLivrableEx();
+		this.dateLiv = new Date();
+	}
+	public void rembourser() {
+		if (! this.payee || this.dateLiv != null)
+			throw new CommandeNonRemboursableEx ();
+		this.payee = false;
+	}
+}

@@ -1,0 +1,52 @@
+REM ********************************************************
+REM EXERCICE 2
+REM Auteur : FESSY Jérôme
+REM ********************************************************
+
+SET LINESIZE 150
+CLEAR SCREEN
+
+
+
+
+DROP TABLE MORCEAU CASCADE CONSTRAINTS PURGE;
+DROP TABLE INTERPRETE CASCADE CONSTRAINTS PURGE;
+DROP TABLE INTERPRETATION CASCADE CONSTRAINTS PURGE;
+
+
+DROP TABLE PRODUIT CASCADE CONSTRAINTS PURGE;
+DROP TABLE HISTO_PRICE CASCADE CONSTRAINTS PURGE;
+
+CREATE TABLE PRODUIT
+(
+	Idproduit INTEGER,
+	Libelleprod VARCHAR2(15),
+	prix NUMBER(10,2),
+	CONSTRAINT PK_PRODUIT PRIMARY KEY (Idproduit)
+)
+/
+
+INSERT INTO produit(idproduit, libelleprod, prix) VALUES (1, 'lego maxi', 35)
+/
+INSERT INTO produit(idproduit, libelleprod, prix) VALUES (2, 'playsatation4', 490)
+/
+
+CREATE TABLE HISTO_PRICE
+(
+	idproduit integer,
+	Oldprice number(10,2),
+	newprice number(10,2),
+	DateMAJ timestamp
+)
+/
+
+CREATE OR REPLACE TRIGGER T_MAJ_PRIX
+AFTER UPDATE OF prix ON produit
+FOR EACH ROW
+BEGIN
+
+INSERT INTO histo_price (idproduit, Oldprice, newprice, DateMAJ) VALUES (:new.idproduit, :old.prix, :new.prix, SYSTIMESTAMP);
+
+END;
+/
+show err

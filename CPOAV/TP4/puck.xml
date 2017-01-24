@@ -1,0 +1,8 @@
+<puck-config>
+	<classpath rec=".jar">lib</classpath>
+	<decouple>decouple.wld</decouple>
+	<src rec=".java">src</src>
+	<out>out</out>
+	<log>puck-log.txt</log>
+	<workspace>Z:\CPOAV\TP4</workspace>
+</puck-config>

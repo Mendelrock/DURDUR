@@ -1,0 +1,62 @@
+package hopital;
+
+public class Patient {
+	private String nomEtat;
+	private String nom;
+	private String doc;
+	private int gravité;
+	private IEtatPatient état;
+
+	public Patient(String nom, int gravité) {
+		this.nom = nom;
+		this.gravité = gravité;
+		//this.nomEtat = "En Attente";
+		this.doc = null;
+		this.état = new EnAttente();
+	}
+	
+	public String getNomEtat() { 
+		return état.getClass().getSimpleName();
+	}
+
+	public String getNom() { 
+		return nom; 
+	}
+
+	public String getDoc() { 
+		return état.getDoc(this);
+	}
+	
+	public void setDoc(String doc){
+		this.doc = doc;
+	}
+
+	public int getGravité() {
+		return gravité; 
+	}
+
+	public void évaluer () {
+		état = état.évaluer(this);
+		if (! nomEtat.equals("En Attente"))
+			throw new PatientPasEnAttente();
+		if (this.gravité >3) {
+			nomEtat = "Affecté";
+			doc = "Dr House";
+		}
+		else nomEtat = "Evalué";
+	}
+
+	public void affecter(String doc) {
+		if (!nomEtat.equals("Evalué"))
+			throw new PatientPasEvalué();
+		nomEtat = "Affecté";
+		this.doc = doc;
+	}
+
+	public void traiter() {
+		if (!nomEtat.equals("Affecté"))
+			throw new PatientPasAffecté();
+		nomEtat = "Traité";
+	}
+}
+

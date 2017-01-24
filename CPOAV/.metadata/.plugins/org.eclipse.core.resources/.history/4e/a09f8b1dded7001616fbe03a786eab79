@@ -1,0 +1,11 @@
+package commandes;
+
+public interface ICommande {
+
+	void payer();
+
+	void livrer();
+
+	void rembourser();
+
+}

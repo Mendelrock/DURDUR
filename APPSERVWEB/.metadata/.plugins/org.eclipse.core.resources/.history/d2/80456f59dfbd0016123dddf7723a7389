@@ -1,0 +1,14 @@
+package serveur;
+
+public class Serveur {
+
+	public Serveur(int port) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void lancer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

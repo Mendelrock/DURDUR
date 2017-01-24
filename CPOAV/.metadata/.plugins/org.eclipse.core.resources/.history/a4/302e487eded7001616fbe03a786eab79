@@ -1,0 +1,17 @@
+package commandes;
+
+import java.util.GregorianCalendar;
+
+public abstract class ACommande {
+	
+	private int numero;
+	private GregorianCalendar dateLiv = null;
+	private boolean payee = false;
+	
+	abstract void payer();
+
+	abstract void livrer();
+
+	abstract void rembourser();
+
+}

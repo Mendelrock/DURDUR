@@ -1,0 +1,43 @@
+package etats;
+
+import java.util.GregorianCalendar;
+
+import commandes.CommandeDéjàPayéeEx;
+import commandes.CommandeNonLivrableEx;
+import commandes.CommandeNonRemboursableEx;
+
+public class Livrée implements ICommande {
+
+	public Livrée(int numero) {
+		this.numero=numero;
+	}
+
+	/* (non-Javadoc)
+	 * @see etats.ICommande#getNuméro()
+	 */
+	@Override
+	public int getNuméro() {
+		return numero;
+	}
+	
+	@Override
+	public ICommande payer() {
+		throw new CommandeDéjàPayéeEx();
+	}
+
+	@Override
+	public ICommande livrer() {
+		throw new CommandeNonLivrableEx();
+	}
+
+	@Override
+	public ICommande rembourser() {
+		throw new CommandeNonRemboursableEx ();
+	}
+
+	@Override
+	public String getEtat() {
+		return "Livrée";
+	}
+
+}

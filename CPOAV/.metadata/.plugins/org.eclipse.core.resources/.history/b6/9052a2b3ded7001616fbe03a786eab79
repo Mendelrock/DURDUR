@@ -1,0 +1,22 @@
+package commandes;
+
+public class NonPayée implements ACommande{
+
+	@Override
+	public void payer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void livrer() {
+		throw new CommandeNonLivrableEx();
+	}
+
+	@Override
+	public void rembourser() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

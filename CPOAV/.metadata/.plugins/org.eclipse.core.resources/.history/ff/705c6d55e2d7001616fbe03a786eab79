@@ -1,0 +1,17 @@
+package etats;
+
+import java.util.GregorianCalendar;
+
+public interface ICommande {
+
+	int getNuméro();
+
+	ICommande payer();
+
+	ICommande livrer();
+
+	ICommande rembourser();
+
+	String getEtat();
+
+}

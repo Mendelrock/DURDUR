@@ -1,0 +1,21 @@
+package arithmétique;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import arithmétique.Opération;
+import arithmétique.Variable;
+
+public class TestArithmétique {
+
+	@Test
+	public void test() {
+		Variable g = new Variable(5.);
+		assertEquals(5., g.eval(), 0.01);
+		Variable d = new Variable(2.);
+		assertEquals(2., d.eval(),0.01);
+		Opération op = new Opération('+',g,d);
+		assertEquals(7., op.eval(),0.01);
+	}
+}

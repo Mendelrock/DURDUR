@@ -1,0 +1,28 @@
+package commandes;
+
+import java.util.GregorianCalendar;
+
+public abstract class ACommande {
+	
+	private int numero;
+	protected GregorianCalendar dateLiv = null;
+	protected boolean payee = false;
+	
+	public int getNuméro() {
+		return numero;
+	}
+	
+	public ACommande(int numero) {
+		this.numero = numero;
+		this.payee = false;
+	}
+	
+	abstract String getEtat();
+	
+	abstract void payer();
+
+	abstract void livrer();
+
+	abstract void rembourser();
+
+}

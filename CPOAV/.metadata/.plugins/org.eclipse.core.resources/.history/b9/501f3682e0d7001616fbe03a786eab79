@@ -1,0 +1,40 @@
+package etats;
+
+import commandes.ACommande;
+import commandes.CommandeDéjàPayéeEx;
+import commandes.CommandeNonLivrableEx;
+import commandes.CommandeNonRemboursableEx;
+
+public class Livrée extends ACommande {
+
+	public Livrée(int numero) {
+		super(numero);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Livrée(ACommande old) {
+		super(old);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public ACommande payer() {
+		throw new CommandeDéjàPayéeEx();
+	}
+
+	@Override
+	public ACommande livrer() {
+		throw new CommandeNonLivrableEx();
+	}
+
+	@Override
+	public ACommande rembourser() {
+		throw new CommandeNonRemboursableEx ();
+	}
+
+	@Override
+	String getEtat() {
+		return "Livrée";
+	}
+
+}

@@ -1,0 +1,29 @@
+package hopital;
+
+public class Traité implements IEtatPatient {
+
+	@Override
+	public String getDoc(Patient pat) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IEtatPatient évaluer(Patient pat) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IEtatPatient affecter(String doc, Patient pat) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IEtatPatient traiter(Patient pat) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

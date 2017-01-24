@@ -1,0 +1,13 @@
+package hopital;
+
+public interface IEtatPatient {
+
+	void getDoc();
+	
+	void évaluer();
+
+	void affecter(String doc);
+
+	void traiter();
+
+}

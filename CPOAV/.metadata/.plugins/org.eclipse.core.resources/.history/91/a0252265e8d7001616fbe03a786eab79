@@ -1,0 +1,80 @@
+package hopital;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class PatientTest {
+	private Patient p1,p2;
+	private String nomP1, nomP2;
+	private String doc1, doc2;
+	private int  gravitéP1, gravitéP2;
+	
+	@Before
+	public void init() {
+		nomP1 = "Bob";
+		gravitéP1 = 2;
+		doc1 = "Dr Ross";
+		nomP2 = "Alice";
+		gravitéP2 = 4;
+		doc2 = "Dr House";
+		p1 = new Patient(nomP1, gravitéP1);
+		p2 = new Patient(nomP2, gravitéP2);
+	}
+	
+	@Test
+	public void testCycleNormalPasGrave() {
+		assertEquals(nomP1, p1.getNom());
+		assertEquals(gravitéP1, p1.getGravité());
+		assertEquals("En Attente", p1.getNomEtat());
+		p1.évaluer();
+		assertEquals("Evalué", p1.getNomEtat());
+		p1.affecter(doc1);
+		assertEquals("Affecté", p1.getNomEtat());
+		assertEquals(doc1,p1.getDoc());
+		p1.traiter();
+		assertEquals("Traité", p1.getNomEtat());
+	}
+	
+	@Test
+	public void testCycleNormalGrave() {
+		assertEquals(nomP2, p2.getNom());
+		assertEquals(gravitéP2, p2.getGravité());
+		assertEquals("EnAttente", p2.getNomEtat());
+		p2.évaluer();
+		assertEquals("Affecté", p2.getNomEtat());
+		assertEquals(doc2,p2.getDoc());
+		p2.traiter();
+		assertEquals("Traité", p2.getNomEtat());
+	}
+	
+	@Test(expected = PatientPasAffecté.class)
+	public void testPasDeDoc() {
+		p1.getDoc();
+	}
+	
+	@Test(expected = PatientPasEvalué.class)
+	public void testPasEvalué() {
+		p1.affecter(doc1);
+
+	}
+	
+	@Test(expected = PatientPasAffecté.class)
+	public void testPasAffecté() {
+		p1.traiter();
+	}
+	
+	@Test(expected = PatientPasAffecté.class)
+	public void testPasValidé() {
+		p1.évaluer();
+		p1.affecter(doc1);
+		p1.traiter();
+		p1.traiter();
+	}
+	@Test(expected = PatientPasEnAttente.class)
+	public void testPatientPasEnAttente() {
+		p1.évaluer();
+		p1.évaluer();
+	}
+}

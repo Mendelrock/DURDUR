@@ -1,0 +1,6 @@
+package hopital;
+
+@SuppressWarnings("serial")
+public class PatientPasAffecté extends RuntimeException {
+
+}

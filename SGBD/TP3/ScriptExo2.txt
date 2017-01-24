@@ -1,0 +1,71 @@
+REM Exercice 2
+
+SET LINESIZE 150
+CLEAR SCREEN
+
+REM Implantation par distinction
+
+drop table ordinateur cascade constraint purge;
+drop table posteclient cascade constraint purge;
+drop table posteserveur cascade constraint purge;
+
+create table ordinateur(
+	noserie integer not null,
+	dateachat date not  null,
+	primary key (noserie));
+
+create table posteclient(
+	noserie integer not null,
+	adrIp varchar(30) not null,
+	masque varchar(30) not null,
+	primary key (noserie));
+
+create table posteserveur(
+	noserie integer not null,
+	nomserveur varchar(30) not null,
+	typedisque varchar(30),
+	primary key (noserie));
+
+alter table posteclient
+	add constraint FK_PC_Ordi foreign key (noserie) references ordinateur(noserie);
+
+alter table posteserveur
+	add constraint FK_PS_Ordi foreign key (noserie) references ordinateur(noserie);
+
+
+
+insert into ordinateur(noserie, dateachat) values (1,'12/01/2016');
+insert into ordinateur(noserie, dateachat) values (2,'15/04/2016');
+insert into ordinateur(noserie, dateachat) values (3, '12/07/2016');
+insert into ordinateur(noserie, dateachat) values (4, '15/01/2016');
+insert into ordinateur(noserie, dateachat) values (5, '02/01/2016');
+insert into ordinateur(noserie, dateachat) values (6, '07/01/2016');
+
+
+insert into posteclient(noserie, adrIP, masque) values (1,'127.168.1.1','255.255.0.0');
+insert into posteclient(noserie, adrIP, masque) values (2,'127.143.1.2','255.255.0.0');
+
+
+insert into posteserveur(noserie, nomserveur, typedisque) values (4, 'zeus','CSS');
+insert into posteserveur(noserie, nomserveur, typedisque) values (3, 'athena','CSS');
+
+PROMPT table ordinateur
+select * from ordinateur;
+
+PROMPT table posteclient
+select * from posteclient;
+
+PROMPT table posteserveur
+select * from posteserveur;
+
+
+PROMPT Donnee en erreur : ordinateur 7 n'existe pas
+
+insert into posteserveur(noserie, nomserveur, typedisque) values (7, 'erreur','CSS');
+
+
+PROMPT ordinateur 1 est aussi un serveur
+
+insert into posteserveur(noserie, nomserveur, typedisque) values (1, 'ORPHEE','CSS');
+
+commit;

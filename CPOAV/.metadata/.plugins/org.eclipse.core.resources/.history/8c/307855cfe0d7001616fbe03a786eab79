@@ -1,0 +1,13 @@
+package etats;
+
+public interface ICommande {
+
+	int getNuméro();
+
+	ACommande payer();
+
+	ACommande livrer();
+
+	ACommande rembourser();
+
+}

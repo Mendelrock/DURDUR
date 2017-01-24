@@ -1,0 +1,27 @@
+package hopital;
+
+public class Affecté implements IEtatPatient {
+
+	@Override
+	public void évaluer() {
+		throw new PatientPasEnAttente();
+	}
+
+	@Override
+	public void affecter(String doc) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void traiter() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String getDoc() {
+		return null;
+	}
+
+}

@@ -1,0 +1,39 @@
+package commandes;
+
+import commandes.ACommande;
+import commandes.CommandeNonLivrableEx;
+import commandes.CommandeNonRemboursableEx;
+
+public class NonPayée extends ACommande{
+
+	public NonPayée(int numero) {
+		super(numero);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public NonPayée(ACommande old) {
+		super(old);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public ACommande payer() {
+		return new Payée(this);
+	}
+
+	@Override
+	public ACommande livrer() {
+		throw new CommandeNonLivrableEx();
+	}
+
+	@Override
+	public ACommande rembourser() {
+		throw new CommandeNonRemboursableEx ();
+	}
+
+	@Override
+	String getEtat() {
+		return "Créée";
+	}
+
+}

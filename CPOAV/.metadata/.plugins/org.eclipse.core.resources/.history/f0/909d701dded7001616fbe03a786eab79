@@ -1,0 +1,56 @@
+package commandes;
+
+import java.util.GregorianCalendar;
+
+public class Commande implements ICommande {
+	
+	private int numero;
+	private GregorianCalendar dateLiv = null;
+	private boolean payee = false;
+	
+	/* (non-Javadoc)
+	 * @see commandes.ICommande#payer()
+	 */
+	@Override
+	public void payer() {
+		if (payee)
+			throw new CommandeDéjàPayéeEx();
+		this.payee = true;
+	}
+	
+	public String getEtat() {
+		if (payee == false)
+			return "Créée";
+		else if (dateLiv == null)
+			return  "Payée";
+		else return "Livrée";
+	}
+	
+	public int getNuméro() {
+		return numero;
+	}
+	
+	public Commande(int numero) {
+		this.numero = numero;
+		this.payee = false;
+	}
+	
+	/* (non-Javadoc)
+	 * @see commandes.ICommande#livrer()
+	 */
+	@Override
+	public void livrer(){
+		if (! this.payee)
+			throw new CommandeNonLivrableEx();
+		this.dateLiv = new GregorianCalendar();
+	}
+	/* (non-Javadoc)
+	 * @see commandes.ICommande#rembourser()
+	 */
+	@Override
+	public void rembourser() {
+		if (! this.payee || this.dateLiv != null)
+			throw new CommandeNonRemboursableEx ();
+		this.payee = false;
+	}
+}

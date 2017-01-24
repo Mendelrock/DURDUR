@@ -1,0 +1,32 @@
+package commandes;
+
+public class Livrée extends ACommande {
+
+	public Livrée(int numero) {
+		super(numero);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void payer() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void livrer() {
+		throw new CommandeNonLivrableEx();
+	}
+
+	@Override
+	public void rembourser() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	String getEtat() {
+		return "Livrée";
+	}
+
+}

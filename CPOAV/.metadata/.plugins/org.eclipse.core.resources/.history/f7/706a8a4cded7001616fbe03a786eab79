@@ -1,0 +1,11 @@
+package commandes;
+
+public abstract class ACommande {
+
+	void payer();
+
+	void livrer();
+
+	void rembourser();
+
+}

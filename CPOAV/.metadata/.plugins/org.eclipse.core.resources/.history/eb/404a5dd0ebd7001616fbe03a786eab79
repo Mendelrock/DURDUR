@@ -1,0 +1,5 @@
+package arithmétique;
+
+public interface IVariable {
+
+}
