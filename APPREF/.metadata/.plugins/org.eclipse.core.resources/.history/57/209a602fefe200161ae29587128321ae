@@ -1,0 +1,10 @@
+package serveur;
+
+public class AppliServeur {
+	
+	public static void main(String args[]){
+		
+		
+	}
+	
+}

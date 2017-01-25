@@ -1,0 +1,31 @@
+package outilserveur;
+
+import java.net.Socket;
+
+public class ServiceManager {
+
+	
+	// attribut static Class
+	
+	private static Class<? extends Service> classe;
+	
+	// méthode statique init
+	
+	public static void init(Class<? extends Service> classe) throws InstantiationException, IllegalAccessException{
+		classe.newInstance();
+		ServiceManager.classe=classe;
+	}
+	
+	// méthode statique newService
+	
+	public static Service newService(Socket client_socket) {	
+		Service service = null;
+		try {
+			service = classe.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		service.setSocket(client_socket);
+		return service;
+	}
+}

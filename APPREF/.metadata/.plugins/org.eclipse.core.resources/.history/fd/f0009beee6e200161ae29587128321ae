@@ -1,0 +1,17 @@
+package outilserveur;
+
+import java.net.Socket;
+
+public class ServiceManager {
+
+	public static Service newService(Socket client_socket) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	// attribut static Class
+	
+	// méthode statique init
+	
+	// méthode statique newService
+
+}

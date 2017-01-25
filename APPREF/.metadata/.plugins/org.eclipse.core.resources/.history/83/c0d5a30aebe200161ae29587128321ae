@@ -1,0 +1,23 @@
+package outilserveur;
+
+import java.net.Socket;
+
+public class ServiceManager {
+
+	
+	// attribut static Class
+	
+	private static Class<?> classe;
+	
+	// méthode statique init
+	
+	public static void init(Class<?> classe){
+		classe=classe.class;
+	}
+	
+	// méthode statique newService
+	
+	public static Service newService(Socket client_socket) {	
+		return null;
+	}
+}
