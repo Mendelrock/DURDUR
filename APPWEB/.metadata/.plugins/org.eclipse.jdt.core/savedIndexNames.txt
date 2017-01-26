@@ -3,7 +3,6 @@ INDEX VERSION 1.127+Z:\DURH\APPWEB\.metadata\.plugins\org.eclipse.jdt.core
 2899712255.index
 2531666063.index
 483659826.index
-1042292736.index
 2448071419.index
 2324149168.index
 542094340.index

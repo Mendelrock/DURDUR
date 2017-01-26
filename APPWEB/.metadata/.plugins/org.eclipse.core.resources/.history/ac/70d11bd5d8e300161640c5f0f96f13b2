@@ -1,0 +1,27 @@
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Client {
+
+	private static Class<?> driver;
+	
+	static{
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			driver=Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DriverManager.getConnection("jdbc:oracle:thin:@vs-oracle2:1521:ORCL", "GRP208US1", "GRP208US1")
+	}
+
+}

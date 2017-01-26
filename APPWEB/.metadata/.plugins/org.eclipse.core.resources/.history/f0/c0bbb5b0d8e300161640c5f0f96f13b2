@@ -1,0 +1,21 @@
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Client {
+
+	private Class<?> driver;
+	
+	static{
+		try {
+			DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+	}
+
+}
