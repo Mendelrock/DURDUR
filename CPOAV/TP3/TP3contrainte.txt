@@ -1,2 +1,0 @@
-Contrainte: il faut cacher les sortes de fichiers de tout le monde SAUF du paquetage FileKinds
-

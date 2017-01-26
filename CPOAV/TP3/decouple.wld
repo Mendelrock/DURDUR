@@ -1,5 +1,0 @@
-import[fileSystem, fileKinds]
-fileTypes = [File, Directory]
-hide fileTypes
-fileKinds friend-of fileTypes
-fileTest friend-of fileTypes

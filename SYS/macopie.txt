@@ -1,6 +1,0 @@
-#!/bin/bash
-
-if cp $1 $2
-then rm $1
-else echo Copie impossible
-fi
