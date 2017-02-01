@@ -1,0 +1,25 @@
+package exo1;
+
+public class AfficheEntete {
+	// ce programme charge une charge à partir de son nom et affiche l'entete de cette classe
+	// public abstract class etc...
+	// le paramétrage des types n'est pas affiché
+	// à faire dans une future version : idem pour chaque méthode
+
+	
+	public static void main(String[] args) {
+		// à tester avec différents types de java.util
+		Class <?> classe = java.util.List.class;
+		
+		System.out.println(enTete(classe));
+	}
+
+	private static String enTete(Class<?> classe) {
+		String s = classe.toGenericString(), su=" extends ", i=" implements ";
+		if(classe.getSuperclass()!=null) su+=classe.getSuperclass().getSimpleName();
+		if(classe.getInterfaces().length>0)
+			for(Class<?> c:classe.getInterfaces()) if(classe.isInterface()) i+=c.getSimpleName()+","; else su+=","+c.getSimpleName();
+		return s+su+i;
+	}
+
+}

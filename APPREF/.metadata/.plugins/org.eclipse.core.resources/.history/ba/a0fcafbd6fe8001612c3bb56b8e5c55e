@@ -1,0 +1,46 @@
+package exo2;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+public class TestBean {
+// teste si une classe est un bean : public, un constructeur vide,Serializable, 
+//		pas final et get/set standard pour chaque attribut
+	
+	public static void main(String[] args) {
+		Class <?> classe = java.util.ArrayList.class;
+		
+		try {
+			validationBean(classe);
+			System.out.println("La classe "+classe.getName()+" est bien un bean conforme aux conventions");
+		} catch (Exception e) {
+			System.err.println(e.getMessage());;
+		}
+	}
+
+
+	private static void validationBean(Class<?> classe) throws Exception {
+		String error="";
+		boolean Rammus = true;
+		if(!classe.toGenericString().contains("public")) error+="La classe n'est pas publique.\n";
+		for(Class<?> c:classe.getInterfaces()) Rammus=Rammus||!c.toGenericString().contains("java.io.Serializable");
+		if(Rammus) error+="La classe n'implémente pas java.io.Serializable\n";
+		if((classe.getConstructor()==null)||(!classe.getConstructor().toGenericString().contains("public"))) error+="Il manque un constructeur public sans argument";
+		for(Field f:classe.getDeclaredFields()){
+			Rammus = true;
+			for(Method c:classe.getDeclaredMethods()){
+				Rammus=Rammus||!c.getName().contains("set"+f.getName());
+			}
+			if(Rammus) error+="Il manque\n";
+			Rammus = true;
+			for(Method c:classe.getDeclaredMethods()){
+				Rammus=Rammus||!c.getName().contains("get"+f.getName());
+			}
+			if(Rammus) error+="Il manque\n";
+		}
+		if(error.length()!=0){
+			error="La classe ne respecte pas la norme JavaBean\n"+error;
+			throw new Exception("");
+		}
+	}
+}

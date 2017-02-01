@@ -1,0 +1,22 @@
+package exo2;
+
+public class TestBean {
+// teste si une classe est un bean : public, un constructeur vide,Serializable, 
+//		pas final et get/set standard pour chaque attribut
+	
+	public static void main(String[] args) {
+		Class <?> classe = java.util.ArrayList.class;
+		
+		try {
+			validationBean(classe);
+			System.out.println("La classe "+classe.getName()+" est bien un bean conforme aux conventions");
+		} catch (Exception e) {
+			System.err.println(e.getMessage());;
+		}
+	}
+
+
+	private static void validationBean(Class<?> classe) throws Exception {
+		if(classe.toGenericString().contains("public"))
+	}
+}

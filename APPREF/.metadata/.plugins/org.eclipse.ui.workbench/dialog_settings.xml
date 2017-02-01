@@ -21,6 +21,7 @@
 	<section name="ZipFileImportWizard">
 		<item value="false" key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="H:\COMMUN\DUT 2ème année\Applis Reflexives Java\tp2\énoncé.jar"/>
 			<item value="H:\COMMUN\DUT 2ème année\Applis Reflexives Java\tp1\énoncé.jar"/>
 		</list>
 	</section>
