@@ -1,11 +1,11 @@
 package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.Instant;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+@SuppressWarnings("serial")
 public class TestServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException { 
