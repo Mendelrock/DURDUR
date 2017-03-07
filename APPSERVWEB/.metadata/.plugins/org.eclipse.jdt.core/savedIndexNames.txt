@@ -1,5 +1,0 @@
-INDEX VERSION 1.127+Z:\APPSERVWEB\.metadata\.plugins\org.eclipse.jdt.core
-794639896.index
-1046850408.index
-2674025601.index
-3112720795.index
