@@ -1,0 +1,14 @@
+package serv;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+
+public class Serv {
+	try{
+		ServerSocket socket = new ServerSocket(2000);
+	}catch(IOException e){
+		e.printStackTrace();
+	}
+}
+	
+	

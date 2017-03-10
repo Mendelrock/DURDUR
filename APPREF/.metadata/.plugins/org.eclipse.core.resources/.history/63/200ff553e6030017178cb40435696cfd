@@ -1,0 +1,8 @@
+package serv;
+
+import java.net.ServerSocket;
+
+public class Serv {
+	ServerSocket socket = new ServerSocket();
+	
+}
